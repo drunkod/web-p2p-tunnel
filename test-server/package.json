@@ -1,0 +1,13 @@
+{
+  "name": "web-p2p-tunnel-test-server",
+  "version": "1.0.0",
+  "description": "Test server for web-p2p-tunnel",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.0",
+    "cors": "^2.8.5"
+  }
+}
