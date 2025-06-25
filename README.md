@@ -146,13 +146,33 @@ Ensure you have Nix installed with flakes enabled. See the [Nix documentation](h
 
 ### Usage
 
-To run the `web-p2p-tunnel` CLI directly using Nix:
+**Running the Tunnel CLI (Default App)**
+
+To run the `web-p2p-tunnel` CLI directly using Nix (this is the default behavior of `nix run`):
 
 ```sh
 nix run . -- -tunnel-target-url http://localhost:8080
 ```
 
 This will build and run the CLI, forwarding to your local server. The public signaling server `https://signal.andrewt.io` is automatically used.
+
+**Starting Web Development Watch Mode**
+
+To start the web development server (usually `npm run build-watch` in the `web` directory):
+```sh
+nix run .#web
+```
+This will change to the `web` directory, run `npm install`, and then `npm run build-watch`.
+
+**Starting the Test Server**
+
+To start the test server (usually `npm start` in the `test-server` directory):
+```sh
+nix run .#test
+```
+This will change to the `test-server` directory, run `npm install`, and then `npm start`. The test server typically runs on `http://localhost:8080`.
+
+**Building Binaries**
 
 To build the `web-p2p-tunnel` binary:
 

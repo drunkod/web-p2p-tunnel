@@ -73,6 +73,30 @@
         # The defaultApp is what runs when you execute 'nix run' without specifying an app.
         defaultApp = self.apps.${system}.default;
 
+        apps.web = {
+          type = "app";
+          program = pkgs.writeShellScriptBin "run-web-dev" ''
+            #!${pkgs.stdenv.shell}
+            echo "### Starting Web Development Environment (from 'web' directory) ###"
+            echo "Running: npm install && npm run build-watch"
+            cd web
+            ${pkgs.nodejs}/bin/npm install
+            ${pkgs.nodejs}/bin/npm run build-watch
+          '';
+        };
+
+        apps.test = {
+          type = "app";
+          program = pkgs.writeShellScriptBin "run-test-server" ''
+            #!${pkgs.stdenv.shell}
+            echo "### Starting Test Server (from 'test-server' directory) ###"
+            echo "Running: npm install && npm start"
+            cd test-server
+            ${pkgs.nodejs}/bin/npm install
+            ${pkgs.nodejs}/bin/npm start
+          '';
+        };
+
         # 'devShells' define development environments.
         devShells.default = pkgs.mkShell {
           name = "web-p2p-tunnel-dev-shell";
