@@ -87,20 +87,49 @@
           shellHook = ''
             echo "### web-p2p-tunnel Development Shell ###"
             echo "The 'web-p2p-tunnel' executable (built from local sources) is in your PATH."
-            echo "The Go toolchain and Node.js are also available."
+            echo "The Go toolchain and Node.js are also available for general tasks."
             echo ""
+            echo "This default shell is primarily for Go development and running the main CLI."
+            echo "For web UI development, use: nix develop .#web"
+            echo "For running the test server, use: nix develop .#test"
+            echo ""
+            echo "To run the main tunnel CLI (after building, or if using the pre-built one):"
+            echo "  web-p2p-tunnel -tunnel-target-url <your-local-server-url>"
+          '';
+        };
+
+        devShells.web = pkgs.mkShell {
+          name = "web-p2p-tunnel-web-dev-shell";
+          buildInputs = [
+            pkgs.nodejs         # For running npm commands in the 'web' directory
+          ];
+          shellHook = ''
+            echo "### web-p2p-tunnel Web Development Shell (nix develop .#web) ###"
+            echo "Node.js and npm are available."
             echo "To work on the web interface:"
-            echo "  cd web"
-            echo "  npm install"
-            echo "  npm run build (or npm run build-watch)"
+            echo "  1. If you haven't already, navigate to the 'web' directory: cd web"
+            echo "  2. Install dependencies: npm install"
+            echo "  3. Build the project: npm run build"
+            echo "  4. For development with auto-rebuild: npm run build-watch"
             echo ""
+            echo "The web assets will be built in the 'web/dist' directory."
+          '';
+        };
+
+        devShells.test = pkgs.mkShell {
+          name = "web-p2p-tunnel-test-server-dev-shell";
+          buildInputs = [
+            pkgs.nodejs         # For running npm commands in the 'test-server' directory
+          ];
+          shellHook = ''
+            echo "### web-p2p-tunnel Test Server Shell (nix develop .#test) ###"
+            echo "Node.js and npm are available."
             echo "To run the test server (listens on http://localhost:8080 by default):"
-            echo "  cd test-server"
-            echo "  npm install"
-            echo "  npm start"
+            echo "  1. If you haven't already, navigate to the 'test-server' directory: cd test-server"
+            echo "  2. Install dependencies: npm install"
+            echo "  3. Start the server: npm start"
             echo ""
-            echo "You can then tunnel to it using:"
-            echo "  web-p2p-tunnel -tunnel-target-url http://localhost:8080"
+            echo "You can then tunnel to it using the main 'web-p2p-tunnel' CLI from another terminal."
           '';
         };
 
