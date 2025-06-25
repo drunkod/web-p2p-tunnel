@@ -167,28 +167,63 @@ nix build .#web-p2p-tunnel
 # The binary will be available in ./result/bin/web-p2p-tunnel
 ```
 
-### Development Shell
+### Development Shells
 
-The flake provides a development shell with Go and Node.js available:
+The flake provides development shells with necessary tools pre-configured.
+
+**Default Development Shell**
+
+This shell is for general development, including working on the Go parts of the project and running the test server.
 
 ```sh
-nix develop
+nix develop .
+# or simply:
+# nix develop
 ```
 
-Inside the shell:
+Inside the default shell:
 - The `web-p2p-tunnel` executable (built from the local source) is in your `PATH`.
-- The Go toolchain is available for building the Go programs.
-- Node.js and npm are available for working on the web interface in the `web` directory.
+- The Go toolchain is available for building the Go programs (`cmd/web-p2p-tunnel`, `cmd/signaling-server`).
+- Node.js and npm are also available in this shell for any general tasks.
+- This shell is best for working on the Go components or running the `web-p2p-tunnel` CLI.
+- For web UI development, use the `web` shell described below (`nix develop .#web`).
+- For running the test server, use the `test` shell described below (`nix develop .#test`).
+
+**Web Development Shell (`web`)**
+
+This shell is specifically for working on the web interface (`web` directory).
+
+```sh
+nix develop .#web
+```
+
+Inside the web development shell:
+- Node.js and npm are available.
+- Instructions:
   ```sh
-  cd web
+  # If not already there:
+  # cd web
   npm install
   npm run build
+  # or for development with auto-rebuild:
+  # npm run build-watch
   ```
 
-  The shell also provides Node.js for the `test-server`. To run the test server (which defaults to `http://localhost:8080`):
+**Test Server Shell (`test`)**
+
+This shell is for running the Node.js test server (`test-server` directory).
+
+```sh
+nix develop .#test
+```
+
+Inside the test server shell:
+- Node.js and npm are available.
+- Instructions:
   ```sh
-  cd test-server
+  # If not already there:
+  # cd test-server
   npm install
   npm start
   ```
-  You can then use `web-p2p-tunnel -tunnel-target-url http://localhost:8080` to tunnel to it.
+  The server will typically run on `http://localhost:8080`.
