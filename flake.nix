@@ -47,7 +47,7 @@
             # Check if at least one argument is provided.
             if [ $# -eq 0 ]; then
                 echo "ERROR: Please provide the required arguments." >&2
-                echo "Usage: nix run . -- -tunnel-target-url http://localhost:8080"
+                echo "Usage: nix run . -- -signaling-server-url https://signal.andrewt.io -tunnel-target-url http://localhost:8080"
                 exit 1
             fi
 
@@ -55,7 +55,7 @@
             
             # Execute the actual binary from the built package.
             # It automatically adds the public signaling server for convenience.
-            exec ${webP2pTunnelPackage}/bin/web-p2p-tunnel -signaling-server-url https://signal.andrewt.io "$@"
+            exec ${webP2pTunnelPackage}/bin/web-p2p-tunnel "$@"
           '';
 
           # Expose the raw, unwrapped Go binary as well.
