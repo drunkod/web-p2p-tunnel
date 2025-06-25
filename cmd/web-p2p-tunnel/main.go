@@ -30,7 +30,31 @@ var (
 	)
 
 	defaultWebrtcConfig = webrtc.Configuration{
-		ICEServers: []webrtc.ICEServer{{URLs: []string{"stun:stun.l.google.com:19302"}}},
+		ICEServers: []webrtc.ICEServer{
+			{
+				URLs: []string{"stun:stun.relay.metered.ca:80"},
+			},
+			{
+				URLs:       []string{"turn:global.relay.metered.ca:80"},
+				Username:   "0ef6af9aa09b1635b8ab1a58",
+				Credential: "uBnm6E/lVSPispsL",
+			},
+			{
+				URLs:       []string{"turn:global.relay.metered.ca:80?transport=tcp"},
+				Username:   "0ef6af9aa09b1635b8ab1a58",
+				Credential: "uBnm6E/lVSPispsL",
+			},
+			{
+				URLs:       []string{"turn:global.relay.metered.ca:443"},
+				Username:   "0ef6af9aa09b1635b8ab1a58",
+				Credential: "uBnm6E/lVSPispsL",
+			},
+			{
+				URLs:       []string{"turns:global.relay.metered.ca:443?transport=tcp"},
+				Username:   "0ef6af9aa09b1635b8ab1a58",
+				Credential: "uBnm6E/lVSPispsL",
+			},
+		},
 	}
 )
 

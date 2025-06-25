@@ -1,6 +1,30 @@
 export async function connectWebRTC(sc: WebSocket, statusEl: HTMLElement) {
   const pc = new RTCPeerConnection({
-    iceServers: [{ urls: 'stun:stun.l.google.com:19302' }],
+    iceServers: [
+      {
+        urls: "stun:stun.relay.metered.ca:80",
+      },
+      {
+        urls: "turn:global.relay.metered.ca:80",
+        username: "0ef6af9aa09b1635b8ab1a58",
+        credential: "uBnm6E/lVSPispsL",
+      },
+      {
+        urls: "turn:global.relay.metered.ca:80?transport=tcp",
+        username: "0ef6af9aa09b1635b8ab1a58",
+        credential: "uBnm6E/lVSPispsL",
+      },
+      {
+        urls: "turn:global.relay.metered.ca:443",
+        username: "0ef6af9aa09b1635b8ab1a58",
+        credential: "uBnm6E/lVSPispsL",
+      },
+      {
+        urls: "turns:global.relay.metered.ca:443?transport=tcp",
+        username: "0ef6af9aa09b1635b8ab1a58",
+        credential: "uBnm6E/lVSPispsL",
+      },
+    ],
   });
 
   statusEl.innerText = pc.connectionState;
