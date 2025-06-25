@@ -184,3 +184,11 @@ Inside the shell:
   npm install
   npm run build
   ```
+
+  The shell also provides Node.js for the `test-server`. To run the test server (which defaults to `http://localhost:8080`):
+  ```sh
+  cd test-server
+  npm install
+  npm start
+  ```
+  You can then use `web-p2p-tunnel -tunnel-target-url http://localhost:8080` to tunnel to it.
