@@ -81,14 +81,26 @@
           buildInputs = [
             webP2pTunnelPackage # Include the built package in the shell
             pkgs.go             # The Go compiler and tools
-            pkgs.nodejs         # For running npm commands in the 'web' directory
+            pkgs.nodejs         # For running npm commands in the 'web' and 'test-server' directories
           ];
 
           shellHook = ''
             echo "### web-p2p-tunnel Development Shell ###"
-            echo "The 'web-p2p-tunnel' executable is available in your PATH."
+            echo "The 'web-p2p-tunnel' executable (built from local sources) is in your PATH."
             echo "The Go toolchain and Node.js are also available."
-            echo "To work on the web interface, cd into the 'web' directory and run 'npm install'."
+            echo ""
+            echo "To work on the web interface:"
+            echo "  cd web"
+            echo "  npm install"
+            echo "  npm run build (or npm run build-watch)"
+            echo ""
+            echo "To run the test server (listens on http://localhost:8080 by default):"
+            echo "  cd test-server"
+            echo "  npm install"
+            echo "  npm start"
+            echo ""
+            echo "You can then tunnel to it using:"
+            echo "  web-p2p-tunnel -tunnel-target-url http://localhost:8080"
           '';
         };
 

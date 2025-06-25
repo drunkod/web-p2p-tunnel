@@ -135,3 +135,60 @@ Build: `npm run build`
 Build (watch mode): `npm run build-watch`
 
 Serve: `npm run serve`
+
+## Nix Flake
+
+This repository includes a [Nix flake](https://nixos.wiki/wiki/Flakes) that provides a reproducible build and development environment.
+
+### Installation
+
+Ensure you have Nix installed with flakes enabled. See the [Nix documentation](https://nixos.org/download.html) for installation instructions.
+
+### Usage
+
+To run the `web-p2p-tunnel` CLI directly using Nix:
+
+```sh
+nix run . -- -tunnel-target-url http://localhost:8080
+```
+
+This will build and run the CLI, forwarding to your local server. The public signaling server `https://signal.andrewt.io` is automatically used.
+
+To build the `web-p2p-tunnel` binary:
+
+```sh
+nix build .
+# The binary will be available in ./result/bin/run-web-p2p-tunnel
+```
+
+You can also build the raw Go binary without the wrapper script:
+```sh
+nix build .#web-p2p-tunnel
+# The binary will be available in ./result/bin/web-p2p-tunnel
+```
+
+### Development Shell
+
+The flake provides a development shell with Go and Node.js available:
+
+```sh
+nix develop
+```
+
+Inside the shell:
+- The `web-p2p-tunnel` executable (built from the local source) is in your `PATH`.
+- The Go toolchain is available for building the Go programs.
+- Node.js and npm are available for working on the web interface in the `web` directory.
+  ```sh
+  cd web
+  npm install
+  npm run build
+  ```
+
+  The shell also provides Node.js for the `test-server`. To run the test server (which defaults to `http://localhost:8080`):
+  ```sh
+  cd test-server
+  npm install
+  npm start
+  ```
+  You can then use `web-p2p-tunnel -tunnel-target-url http://localhost:8080` to tunnel to it.
