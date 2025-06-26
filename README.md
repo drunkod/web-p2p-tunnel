@@ -151,7 +151,7 @@ Ensure you have Nix installed with flakes enabled. See the [Nix documentation](h
 To run the `web-p2p-tunnel` CLI directly using Nix (this is the default behavior of `nix run`):
 
 ```sh
-nix run . -- -tunnel-target-url http://localhost:8080
+nix run . -- -signaling-server-url https://signal.andrewt.io -tunnel-target-url http://localhost:8080
 ```
 
 This will build and run the CLI, forwarding to your local server. The public signaling server `https://signal.andrewt.io` is automatically used.
