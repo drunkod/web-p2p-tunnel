@@ -28,7 +28,7 @@
           # vendorHash = pkgs.lib.fakeSha256;
           # Then, run 'nix build .#web-p2p-tunnel'. The build will fail and print the correct hash.
           # Replace the placeholder with the correct hash.
-          vendorHash = "sha256-QkHxkFo2y5aQVf2g2Nf8PQuzAyV3NqfGsoL979ch2x8=";
+          vendorHash = "sha256-BuYnjAOjD6EkWJ9uQhBv49Mxo1iDuRs98zDJ8XT/FFA=";
 
           # Go binaries are statically linked by default, making them portable
           # across different Linux distributions like Alpine.
