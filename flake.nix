@@ -80,8 +80,11 @@
             echo "### Starting Web Development Environment (from 'web' directory) ###"
             echo "Running: npm install && npm run build-watch"
             cd web
+            export PUBLIC_SIGNALING_SERVER_URL="https://signal-webrtc-deno.drunkod.deno.net"
+
             ${pkgs.nodejs}/bin/npm install
-            ${pkgs.nodejs}/bin/npm run build-watch
+            ${pkgs.nodejs}/bin/npm run build
+            ${pkgs.nodejs}/bin/npm run serve
           ''}/bin/run-web-dev";
         };
 
